@@ -53,12 +53,7 @@ export const SocioNegocio = () => {
           list={list}
         />
       </Grid>
-      <ModalForm
-        open={openModal}
-        onClose={handleClose}
-        title="socionegocio"
-        descripcion="socionegocio-des"
-      >
+      <ModalForm open={openModal} handleClose={handleClose}>
         <Grid component={Paper}>
           <SocioNegocioForm modeEdit={modeEdit} datos={selected} />
         </Grid>

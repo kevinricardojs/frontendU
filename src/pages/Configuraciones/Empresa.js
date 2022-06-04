@@ -41,12 +41,7 @@ export const Empresa = () => {
           handleDelete={handleDelete}
         />
       </Grid>
-      <ModalForm
-        open={openModal}
-        onClose={handleClose}
-        title="empresa"
-        descripcion="empresa-des"
-      >
+      <ModalForm open={openModal} handleClose={handleClose}>
         <Grid component={Paper}>
           <EmpresaForm modeEdit={modeEdit} datos={selected} />
         </Grid>

@@ -163,7 +163,6 @@ EnhancedTableToolbar.propTypes = {
 export default function EnhancedTable({
   headCells,
   rows,
-  columns,
   title,
   handleAdd,
   handleUpdate,
@@ -228,7 +227,6 @@ export default function EnhancedTable({
               .map((row, index) => {
                 const isItemSelected = row.id === selected.id;
                 const labelId = `enhanced-table-checkbox-${index}`;
-                const columnsL = columns.filter((c) => c.name !== "id");
                 return (
                   <TableRow
                     hover
@@ -257,11 +255,14 @@ export default function EnhancedTable({
                     >
                       {row.id}
                     </TableCell>
-                    {columnsL.map((column) => (
-                      <TableCell key={column.name} align={column.align}>
-                        {row[column.name]}
-                      </TableCell>
-                    ))}
+                    {headCells.map(
+                      (column) =>
+                        column.id !== "id" && (
+                          <TableCell key={column.id} align={column.align}>
+                            {row[column.id]}
+                          </TableCell>
+                        )
+                    )}
                   </TableRow>
                 );
               })}

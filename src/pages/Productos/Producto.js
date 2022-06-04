@@ -2,14 +2,16 @@ import { Container, Grid, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ModalForm } from "../../components/ModalForm";
-import { SucursalForm } from "../../components/Sucursal";
-import { SucursalList } from "../../components/Sucursal/SucursalList";
+import {
+  ProductoForm,
+  ProductoList,
+} from "../../components/Producto";
 
-export const Sucursal = () => {
+export const Producto = () => {
   const [selected, setSelected] = useState({ id: -1 });
   const [openModal, setOpenModal] = useState(false);
   const [modeEdit, setModeEdit] = useState(false);
-  const { loading, list } = useSelector((state) => state.sucursal);
+  const { loading, list } = useSelector((state) => state.producto);
 
   const handleAdd = () => {
     setModeEdit(false);
@@ -41,7 +43,7 @@ export const Sucursal = () => {
         padding={1}
         elevation={1}
       >
-        <SucursalList
+        <ProductoList
           selected={selected}
           setSelected={setSelected}
           handleAdd={handleAdd}
@@ -51,10 +53,9 @@ export const Sucursal = () => {
           list={list}
         />
       </Grid>
-
       <ModalForm open={openModal} handleClose={handleClose}>
         <Grid component={Paper}>
-          <SucursalForm modeEdit={modeEdit} datos={selected} />
+          <ProductoForm modeEdit={modeEdit} datos={selected} />
         </Grid>
       </ModalForm>
     </Container>

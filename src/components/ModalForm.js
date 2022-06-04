@@ -1,19 +1,12 @@
 import { Modal } from "@mui/material";
 import React from "react";
+import PropTypes from "prop-types";
 
-export const ModalForm = ({
-  children,
-  open,
-  handleClose,
-  title,
-  descripcion,
-}) => {
+export const ModalForm = ({ children, open, handleClose }) => {
   return (
     <Modal
       open={open}
       onClose={handleClose}
-      aria-labelledby={title}
-      aria-describedby={descripcion}
       style={{
         display: "flex",
         alignItems: "center",
@@ -23,4 +16,8 @@ export const ModalForm = ({
       {children}
     </Modal>
   );
+};
+ModalForm.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };

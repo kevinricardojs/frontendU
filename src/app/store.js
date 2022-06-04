@@ -6,6 +6,10 @@ import loadingGlobalReducer from "../slices/loadingGlobal";
 import empresaReducer from "../slices/configuraciones/empresasSlice";
 import sucursalReducer from "../slices/configuraciones/sucursalesSlice";
 import socioNegocioReducer from "../slices/configuraciones/socioNegociosSlice";
+import familiaProductoReducer from "../slices/productos/familiaProductosSlice";
+import tipoProductoReducer from "../slices/productos/tipoProductosSlice";
+import productoReducer from "../slices/productos/productosSlice";
+import cuentaReducer from "../slices/presupuesto/cuentasSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +20,9 @@ export const store = configureStore({
     empresa: empresaReducer,
     sucursal: sucursalReducer,
     socioNegocio: socioNegocioReducer,
+    familiaProducto: familiaProductoReducer,
+    tipoProducto: tipoProductoReducer,
+    producto: productoReducer,
+    cuenta: cuentaReducer,
   },
 });
