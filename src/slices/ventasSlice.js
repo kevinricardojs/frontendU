@@ -2,15 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ClienteHttp from "../servicios/ClienteHttp";
 
 export const fetchList = createAsyncThunk(
-  "compras/fetchList",
+  "ventas/fetchList",
   async (args, { dispatch }) => {
-    await ClienteHttp.get("/compras").then((response) => {
+    await ClienteHttp.get("/ventas").then((response) => {
       dispatch(setList(response.data));
     });
   }
 );
-export const comprasSlice = createSlice({
-  name: "compras",
+export const ventasSlice = createSlice({
+  name: "ventas",
   initialState: {
     loading: true,
     list: [],
@@ -36,5 +36,5 @@ export const comprasSlice = createSlice({
     },
   },
 });
-export const { setList, add, update } = comprasSlice.actions;
-export default comprasSlice.reducer;
+export const { setList, add, update } = ventasSlice.actions;
+export default ventasSlice.reducer;

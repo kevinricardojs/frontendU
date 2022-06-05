@@ -49,7 +49,7 @@ function stableSort(array, comparator) {
 }
 
 function EnhancedTableHead(props) {
-  const { headCells, order, orderBy, onRequestSort } = props;
+  const { headCells, order, orderBy, onRequestSort, selectable } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -57,7 +57,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox"></TableCell>
+        {selectable && <TableCell padding="checkbox"></TableCell>}
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -167,8 +167,9 @@ export default function EnhancedTable({
   handleAdd,
   handleUpdate,
   handleDelete,
-  selected,
+  selected = { id: -1 },
   setSelected,
+  selectable = false,
 }) {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("descripcion");
@@ -204,13 +205,15 @@ export default function EnhancedTable({
 
   return (
     <Box sx={{ width: "100%" }}>
-      <EnhancedTableToolbar
-        selected={selected.id}
-        title={title}
-        handleAdd={handleAdd}
-        handleUpdate={handleUpdate}
-        handleDelete={handleDelete}
-      />
+      {selectable && (
+        <EnhancedTableToolbar
+          selected={selected.id}
+          title={title}
+          handleAdd={handleAdd}
+          handleUpdate={handleUpdate}
+          handleDelete={handleDelete}
+        />
+      )}
       <TableContainer>
         <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
           <EnhancedTableHead
@@ -220,6 +223,7 @@ export default function EnhancedTable({
             orderBy={orderBy}
             onRequestSort={handleRequestSort}
             rowCount={rows.length}
+            selectable={selectable}
           />
           <TableBody>
             {stableSort(rows, getComparator(order, orderBy))
@@ -230,22 +234,26 @@ export default function EnhancedTable({
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.id)}
+                    onClick={(event) =>
+                      selectable && handleClick(event, row.id)
+                    }
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
                     key={row.id}
                     selected={isItemSelected}
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          "aria-labelledby": labelId,
-                        }}
-                      />
-                    </TableCell>
+                    {selectable && (
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          color="primary"
+                          checked={isItemSelected}
+                          inputProps={{
+                            "aria-labelledby": labelId,
+                          }}
+                        />
+                      </TableCell>
+                    )}
                     <TableCell
                       component="th"
                       id={labelId}

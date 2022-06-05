@@ -55,6 +55,7 @@ export const ProductoList = ({
           handleAdd={handleAdd}
           handleUpdate={handleUpdate}
           handleDelete={handleDelete}
+          selectable
         />
       )}
     </>

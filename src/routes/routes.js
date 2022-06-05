@@ -1,7 +1,10 @@
 import { Compra } from "../pages/Compra";
+import { CompraList } from "../pages/CompraList";
 import { Empresa, Sucursal, SocioNegocio } from "../pages/Configuraciones";
 import { Cuenta } from "../pages/Presupuesto";
 import { FamiliaProducto, TipoProducto, Producto } from "../pages/Productos";
+import { Venta } from "../pages/Venta";
+import { VentaList } from "../pages/VentaList";
 export const routes = [
   {
     descripcion: "Configuraciones",
@@ -61,9 +64,30 @@ export const routes = [
     materialIcon: "config",
     rutas: [
       {
-        descripcion: "Compra",
+        descripcion: "Registrar Compra",
         url: "/Compra",
         componente: Compra,
+      },
+      {
+        descripcion: "Compras Realizadas",
+        url: "/Compras",
+        componente: CompraList,
+      },
+    ],
+  },
+  {
+    descripcion: "Venta",
+    materialIcon: "config",
+    rutas: [
+      {
+        descripcion: "Registrar Venta",
+        url: "/Venta",
+        componente: Venta,
+      },
+      {
+        descripcion: "Ventas Realizadas",
+        url: "/Ventas",
+        componente: VentaList,
       },
     ],
   },

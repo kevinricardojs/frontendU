@@ -74,6 +74,7 @@ export const FamiliaProductoList = ({
           handleAdd={handleAdd}
           handleUpdate={handleUpdate}
           handleDelete={handleDelete}
+          selectable
         />
       )}
     </>

@@ -63,6 +63,7 @@ export const EmpresaList = ({
           handleAdd={handleAdd}
           handleUpdate={handleUpdate}
           handleDelete={handleDelete}
+          selectable
         />
       )}
     </>

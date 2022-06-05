@@ -43,6 +43,7 @@ export const TipoProductoList = ({
           handleAdd={handleAdd}
           handleUpdate={handleUpdate}
           handleDelete={handleDelete}
+          selectable
         />
       )}
     </>

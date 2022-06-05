@@ -55,6 +55,7 @@ export const CuentaList = ({
           handleAdd={handleAdd}
           handleUpdate={handleUpdate}
           handleDelete={handleDelete}
+          selectable
         />
       )}
     </>

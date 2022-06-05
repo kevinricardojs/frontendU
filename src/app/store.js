@@ -11,6 +11,7 @@ import tipoProductoReducer from "../slices/productos/tipoProductosSlice";
 import productoReducer from "../slices/productos/productosSlice";
 import cuentaReducer from "../slices/presupuesto/cuentasSlice";
 import compraReducer from "../slices/comprasSlice";
+import ventaReducer from "../slices/ventasSlice";
 
 export const store = configureStore({
   reducer: {
@@ -26,5 +27,6 @@ export const store = configureStore({
     producto: productoReducer,
     cuenta: cuentaReducer,
     compra: compraReducer,
+    venta: ventaReducer,
   },
 });

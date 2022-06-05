@@ -26,21 +26,21 @@ import { showError, showSuccess } from "../../slices/snackSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchList as fetchProductos } from "../../slices/productos/productosSlice";
 import { fetchList as fetchSocios } from "../../slices/configuraciones/socioNegociosSlice";
-import { add, update } from "../../slices/comprasSlice";
+import { add, update } from "../../slices/ventasSlice";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import { AddCircle, Delete } from "@mui/icons-material";
 
-export const CompraForm = ({ modeEdit, datos }) => {
+export const VentaForm = ({ modeEdit, datos }) => {
   const { list: productos } = useSelector((state) => state.producto);
   const socios = useSelector((state) =>
-    state.socioNegocio.list.filter((s) => s.tipo === 0)
+    state.socioNegocio.list.filter((s) => s.tipo === 1)
   );
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object({
-    socioNegocioID: Yup.number().min(0, "Debes seleccionar un proveedor"),
+    socioNegocioID: Yup.number().min(0, "Debes seleccionar un Cliente"),
     facturaSerie: Yup.string()
       .required("Debes ingresar la serie de la factura")
       .min(5, "La serie de la factura tiene un minimo de 5 caracteres"),
@@ -81,22 +81,22 @@ export const CompraForm = ({ modeEdit, datos }) => {
         try {
           const json = JSON.stringify({ ...values });
 
-          const { data } = await apiClient.post(`/compras`, json);
-          dispatch(showSuccess(`Compra #${data.id} Creada`));
+          const { data } = await apiClient.post(`/Ventas`, json);
+          dispatch(showSuccess(`Venta #${data.id} Creada`));
           dispatch(add(data));
           formik.resetForm();
         } catch (e) {
-          dispatch(showError("Error al crear el Compra"));
+          dispatch(showError("Error al crear el Venta"));
         }
       } else {
         try {
           const json = JSON.stringify({ ...values });
 
-          await apiClient.put(`/compras/${datos.id}`, json);
+          await apiClient.put(`/Ventas/${datos.id}`, json);
           dispatch(update({ ...values }));
-          dispatch(showSuccess(`Compra actualizada`));
+          dispatch(showSuccess(`Venta actualizada`));
         } catch (e) {
-          dispatch(showError("Error al actualizar el Compra"));
+          dispatch(showError("Error al actualizar el Venta"));
         }
       }
     },
@@ -139,7 +139,7 @@ export const CompraForm = ({ modeEdit, datos }) => {
     >
       <Grid item md={12} xs={12} lg={12} sm={12}>
         <Typography variant="h2">
-          {modeEdit ? "Editar" : "Crea"} una Compra
+          {modeEdit ? "Editar" : "Crea"} una Venta
         </Typography>
       </Grid>
       <Grid item xs={12} sm={6} md={3} lg={3}>
@@ -150,22 +150,22 @@ export const CompraForm = ({ modeEdit, datos }) => {
             formik.touched.socioNegocioID && formik.errors.socioNegocioID
           )}
         >
-          <InputLabel id="socioNegocioID">Proveedor</InputLabel>
+          <InputLabel id="socioNegocioID">Cliente</InputLabel>
           <Select
             labelId="socioNegocioID"
             id="socioNegocioID-select"
             name="socioNegocioID"
             value={formik.values.socioNegocioID}
-            label="Proveedor"
+            label="Cliente"
             onChange={formik.handleChange}
             renderValue={(selected) => {
               const { nombre } = socios.find((s) => s.id === selected) || {
-                nombre: "Selecciona un proveedor",
+                nombre: "Selecciona un Cliente",
               };
               return nombre;
             }}
           >
-            <MenuItem value="-1">Selecciona un proveedor</MenuItem>
+            <MenuItem value="-1">Selecciona un Cliente</MenuItem>
             {socios.map((socio) => (
               <MenuItem key={socio.id} value={socio.id}>
                 {socio.nombre}
@@ -198,7 +198,7 @@ export const CompraForm = ({ modeEdit, datos }) => {
       <Grid item xs={12} sm={6} md={3} lg={3}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
-            label="Fecha de factura de proveedor"
+            label="Fecha de factura de Cliente"
             inputVariant="outlined"
             value={formik.values.facturaFecha}
             onChange={(newDate) => {
