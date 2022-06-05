@@ -86,7 +86,8 @@ export const VentaForm = ({ modeEdit, datos }) => {
           dispatch(add(data));
           formik.resetForm();
         } catch (e) {
-          dispatch(showError("Error al crear el Venta"));
+          const errorMessage = e.response.data.error;
+          dispatch(showError(`Error ${errorMessage}`));
         }
       } else {
         try {

@@ -6,7 +6,11 @@ import {
   Button,
   CircularProgress,
   FormControl,
+  FormControlLabel,
+  FormLabel,
   Grid,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from "@mui/material";
@@ -159,6 +163,18 @@ export const SocioNegocioForm = ({ modeEdit, datos }) => {
           variant="outlined"
         />
       </FormControl>
+      <FormControl margin="normal" disabled={formik.isSubmitting}>
+        <FormLabel id="demo-radio-buttons-group-label">Tipo</FormLabel>
+        <RadioGroup
+          value={formik.values.tipo}
+          name="tipo"
+          onChange={formik.handleChange}
+        >
+          <FormControlLabel value="0" control={<Radio />} label="Proveedor" />
+          <FormControlLabel value="1" control={<Radio />} label="Cliente" />
+        </RadioGroup>
+      </FormControl>
+      <br />
       <FormControl margin="normal">
         <Button
           variant="contained"
