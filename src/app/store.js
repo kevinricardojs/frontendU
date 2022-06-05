@@ -10,6 +10,7 @@ import familiaProductoReducer from "../slices/productos/familiaProductosSlice";
 import tipoProductoReducer from "../slices/productos/tipoProductosSlice";
 import productoReducer from "../slices/productos/productosSlice";
 import cuentaReducer from "../slices/presupuesto/cuentasSlice";
+import compraReducer from "../slices/comprasSlice";
 
 export const store = configureStore({
   reducer: {
@@ -24,5 +25,6 @@ export const store = configureStore({
     tipoProducto: tipoProductoReducer,
     producto: productoReducer,
     cuenta: cuentaReducer,
+    compra: compraReducer,
   },
 });

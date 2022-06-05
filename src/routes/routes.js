@@ -1,3 +1,4 @@
+import { Compra } from "../pages/Compra";
 import { Empresa, Sucursal, SocioNegocio } from "../pages/Configuraciones";
 import { Cuenta } from "../pages/Presupuesto";
 import { FamiliaProducto, TipoProducto, Producto } from "../pages/Productos";
@@ -52,6 +53,17 @@ export const routes = [
         descripcion: "Cuentas Contables",
         url: "/Cuenta",
         componente: Cuenta,
+      },
+    ],
+  },
+  {
+    descripcion: "Compra",
+    materialIcon: "config",
+    rutas: [
+      {
+        descripcion: "Compra",
+        url: "/Compra",
+        componente: Compra,
       },
     ],
   },

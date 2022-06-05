@@ -1,0 +1,1 @@
+export { CompraForm } from "./CompraForm";
