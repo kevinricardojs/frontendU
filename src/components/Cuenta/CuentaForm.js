@@ -6,7 +6,11 @@ import {
   Button,
   CircularProgress,
   FormControl,
+  FormControlLabel,
+  FormLabel,
   Grid,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from "@mui/material";
@@ -18,27 +22,19 @@ import { add, update } from "../../slices/presupuesto/cuentasSlice";
 export const CuentaForm = ({ modeEdit, datos }) => {
   const dispatch = useDispatch();
   const validationSchema = Yup.object({
-    nombre: Yup.string()
-      .required("Debes ingresar el nombre")
-      .min(10, "El nombre tiene un minimo de 10 caracteres"),
-    telefono: Yup.string()
-      .required("Debes ingresar el telefono")
-      .min(8, "El nombre tiene un minimo de 8 caracteres")
-      .max(8, "El nombre tiene un maximo de 8 caracteres"),
-    direccion: Yup.string()
-      .required("Debes ingresar el direccion")
-      .min(5, "El direccion tiene un minimo de 5 caracteres"),
-    nit: Yup.string()
-      .required("Debes ingresar el NIT")
-      .min(13, "El nombre tiene un minimo de 13 caracteres")
-      .max(13, "El nombre tiene un maximo de 13 caracteres"),
+    nivel: Yup.number().required("Debes ingresar el nivel"),
+    descripcion: Yup.string()
+      .required("Debes ingresar el descripcion")
+      .min(5, "El descripcion tiene un minimo de 5 caracteres"),
+    codigoCuenta: Yup.string()
+      .required("Debes ingresar el codigoCuenta")
+      .min(4, "El nivel tiene un minimo de 4 caracteres")
+      .max(4, "El nivel tiene un maximo de 4 caracteres"),
   });
   const initialValues = {
-    nombre: "",
-    telefono: "",
-    direccion: "",
-    nit: "",
-    tipo: "0",
+    descripcion: "",
+    codigoCuenta: "",
+    nivel: 1,
     submit: null,
   };
   const formik = useFormik({
@@ -50,28 +46,22 @@ export const CuentaForm = ({ modeEdit, datos }) => {
         try {
           const json = JSON.stringify({ ...values });
 
-          const { data } = await apiClient.post(
-            `/prespuesto/cuentas`,
-            json
-          );
-          dispatch(showSuccess(`Socio de Negocio #${data.id} Creada`));
+          const { data } = await apiClient.post(`/presupuesto/cuentas`, json);
+          dispatch(showSuccess(`Cuenta #${data.id} Creada`));
           dispatch(add(data));
           formik.resetForm();
         } catch (e) {
-          dispatch(showError("Error al crear la Socio de Negocio"));
+          dispatch(showError("Error al crear la Cuenta"));
         }
       } else {
         try {
           const json = JSON.stringify({ ...values });
 
-          await apiClient.put(
-            `/prespuesto/cuentas/${datos.id}`,
-            json
-          );
+          await apiClient.put(`/presupuesto/cuentas/${datos.id}`, json);
           dispatch(update({ ...values }));
-          dispatch(showSuccess(`Socio de Negocio actualizada`));
+          dispatch(showSuccess(`Cuenta actualizada`));
         } catch (e) {
-          dispatch(showError("Error al actualizar la Socio de Negocio"));
+          dispatch(showError("Error al actualizar la Cuenta"));
         }
       }
     },
@@ -89,76 +79,58 @@ export const CuentaForm = ({ modeEdit, datos }) => {
       onSubmit={formik.handleSubmit}
     >
       <Typography variant="h2">
-        {modeEdit ? "Editar" : "Crea"} un Socio de Negocio
+        {modeEdit ? "Editar" : "Crea"} un Cuenta
       </Typography>
       <FormControl fullWidth margin="normal">
         <TextField
           disabled={formik.isSubmitting}
-          error={Boolean(formik.touched.nombre && formik.errors.nombre)}
+          error={Boolean(
+            formik.touched.descripcion && formik.errors.descripcion
+          )}
           fullWidth
-          helperText={formik.touched.nombre && formik.errors.nombre}
-          label="Nombre"
+          helperText={formik.touched.descripcion && formik.errors.descripcion}
+          label="Descripcion"
           margin="normal"
-          placeholder="Ingresa el nombre de la Socio de Negocio"
-          name="nombre"
+          placeholder="Ingresa el descripcion de la Cuenta"
+          name="descripcion"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           type="text"
-          value={formik.values.nombre}
+          value={formik.values.descripcion}
           variant="outlined"
         />
       </FormControl>
       <FormControl fullWidth margin="normal">
         <TextField
           disabled={formik.isSubmitting}
-          error={Boolean(formik.touched.direccion && formik.errors.direccion)}
+          error={Boolean(
+            formik.touched.codigoCuenta && formik.errors.codigoCuenta
+          )}
           fullWidth
-          helperText={formik.touched.direccion && formik.errors.direccion}
-          label="Direccion"
+          helperText={formik.touched.codigoCuenta && formik.errors.codigoCuenta}
+          label="Codigo de Cuenta"
           margin="normal"
-          placeholder="Ingresa el direccion de la Socio de Negocio"
-          name="direccion"
+          placeholder="Ingresa el Codigo Cuenta"
+          name="codigoCuenta"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           type="text"
-          value={formik.values.direccion}
+          value={formik.values.codigoCuenta}
           variant="outlined"
         />
       </FormControl>
-      <FormControl fullWidth margin="normal">
-        <TextField
-          disabled={formik.isSubmitting}
-          error={Boolean(formik.touched.nit && formik.errors.nit)}
-          fullWidth
-          helperText={formik.touched.nit && formik.errors.nit}
-          label="Nit"
-          margin="normal"
-          placeholder="Ingresa el nit"
-          name="nit"
-          onBlur={formik.handleBlur}
+      <FormControl margin="normal" disabled={formik.isSubmitting}>
+        <FormLabel id="demo-radio-buttons-group-label">Nivel</FormLabel>
+        <RadioGroup
+          value={formik.values.nivel}
+          name="nivel"
           onChange={formik.handleChange}
-          type="text"
-          value={formik.values.nit}
-          variant="outlined"
-        />
+        >
+          <FormControlLabel value="1" control={<Radio />} label="Nivel 1" />
+          <FormControlLabel value="2" control={<Radio />} label="Nivel 2" />
+        </RadioGroup>
       </FormControl>
-      <FormControl fullWidth margin="normal">
-        <TextField
-          disabled={formik.isSubmitting}
-          error={Boolean(formik.touched.telefono && formik.errors.telefono)}
-          fullWidth
-          helperText={formik.touched.telefono && formik.errors.telefono}
-          label="telefono"
-          margin="normal"
-          placeholder="Ingresa el telefono"
-          name="telefono"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          type="tel"
-          value={formik.values.telefono}
-          variant="outlined"
-        />
-      </FormControl>
+      <br />
       <FormControl margin="normal">
         <Button
           variant="contained"

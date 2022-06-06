@@ -1,7 +1,10 @@
 import { Compra } from "../pages/Compra";
 import { CompraList } from "../pages/CompraList";
 import { Empresa, Sucursal, SocioNegocio } from "../pages/Configuraciones";
+import { ListaMaterial } from "../pages/ListaMaterial";
+import { ListaMaterialList } from "../pages/ListaMaterialList";
 import { Cuenta } from "../pages/Presupuesto";
+import { Produccion } from "../pages/Produccion";
 import { FamiliaProducto, TipoProducto, Producto } from "../pages/Productos";
 import { Venta } from "../pages/Venta";
 import { VentaList } from "../pages/VentaList";
@@ -88,6 +91,33 @@ export const routes = [
         descripcion: "Ventas Realizadas",
         url: "/Ventas",
         componente: VentaList,
+      },
+    ],
+  },
+  {
+    descripcion: "Lista de Materiales",
+    materialIcon: "config",
+    rutas: [
+      {
+        descripcion: "Crear Lista de Materiales",
+        url: "/ListaMaterial",
+        componente: ListaMaterial,
+      },
+      {
+        descripcion: "Lista de Materiales Realizadas",
+        url: "/ListaMaterials",
+        componente: ListaMaterialList,
+      },
+    ],
+  },
+  {
+    descripcion: "Producción",
+    materialIcon: "config",
+    rutas: [
+      {
+        descripcion: "Producir",
+        url: "/Produccion",
+        componente: Produccion,
       },
     ],
   },

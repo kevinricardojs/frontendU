@@ -27,7 +27,7 @@ export const ProductoForm = ({ modeEdit, datos }) => {
   const validationSchema = Yup.object({
     descripcion: Yup.string()
       .required("Debes ingresar el descripcion")
-      .min(10, "El descripcion tiene un minimo de 10 caracteres"),
+      .min(5, "El descripcion tiene un minimo de 5 caracteres"),
   });
   const initialValues = {
     descripcion: "",
