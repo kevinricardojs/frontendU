@@ -6,6 +6,7 @@ import { ListaMaterialList } from "../pages/ListaMaterialList";
 import { Cuenta } from "../pages/Presupuesto";
 import { Produccion } from "../pages/Produccion";
 import { FamiliaProducto, TipoProducto, Producto } from "../pages/Productos";
+import { Salida } from "../pages/Salida";
 import { Venta } from "../pages/Venta";
 import { VentaList } from "../pages/VentaList";
 export const routes = [
@@ -118,6 +119,17 @@ export const routes = [
         descripcion: "Producir",
         url: "/Produccion",
         componente: Produccion,
+      },
+    ],
+  },
+  {
+    descripcion: "Salidas",
+    materialIcon: "config",
+    rutas: [
+      {
+        descripcion: "Salida",
+        url: "/Salida",
+        componente: Salida,
       },
     ],
   },

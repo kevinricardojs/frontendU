@@ -14,6 +14,7 @@ import compraReducer from "../slices/comprasSlice";
 import ventaReducer from "../slices/ventasSlice";
 import listaMaterialReducer from "../slices/listaMaterialesSlice";
 import produccionReducer from "../slices/produccionesSlice";
+import salidaReducer from "../slices/salidasSlice";
 
 export const store = configureStore({
   reducer: {
@@ -32,5 +33,6 @@ export const store = configureStore({
     venta: ventaReducer,
     listaMaterial: listaMaterialReducer,
     produccion: produccionReducer,
+    salida: salidaReducer,
   },
 });
