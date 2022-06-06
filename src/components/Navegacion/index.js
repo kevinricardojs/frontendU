@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, IconButton, Typography, Chip } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Chip } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import MenuIzquierdo from "./MenuIzquierdo";

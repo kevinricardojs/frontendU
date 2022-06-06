@@ -49,7 +49,7 @@ export const CuentaList = ({
         <EnhancedTable
           headCells={headCells}
           rows={list}
-          title="Socios de Negocio"
+          title="Cuentas Contables"
           selected={selected}
           setSelected={setSelected}
           handleAdd={handleAdd}
