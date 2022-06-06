@@ -10,13 +10,13 @@ import {
 } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { AccountBox, Email, MenuOpen } from "@mui/icons-material";
-import Icon from "@mui/material/Icon";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import React from "react";
-import { useSelector } from "react-redux";
+import { OpcionDesplegable } from "./OpcionDesplegable";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import { routes } from "../../routes/routes";
+import { fetchList as fetchSucursales } from "../../slices/configuraciones/sucursalesSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,14 +27,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MenuIzquierdo = ({ openDrawer, closeDrawer }) => {
-
+  const dispatch = useDispatch();
   const { usuario } = useSelector((state) => state.usuario);
+  const { descripcion } = useSelector((state) =>
+    state.sucursal.list.find((s) => s.id === usuario.sucursal)
+  ) || { descripcion: "" };
   const classes = useStyles();
   const history = useHistory();
   const navegarA = (ruta) => {
     history.push(`${ruta}`);
   };
-
+  useEffect(() => {
+    dispatch(fetchSucursales());
+  }, [dispatch]);
   return (
     <div className={classes.root}>
       <Drawer
@@ -69,7 +74,7 @@ const MenuIzquierdo = ({ openDrawer, closeDrawer }) => {
               <ListItemIcon>
                 <BusinessOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary={usuario.departamento} disableTypography />
+              <ListItemText primary={descripcion} disableTypography />
             </ListItem>
           </List>
         </Box>
@@ -81,30 +86,12 @@ const MenuIzquierdo = ({ openDrawer, closeDrawer }) => {
             <ListItemText primary="Menú" />
           </ListItem>
           <Divider variant="fullWidth" />
-          {routes.map((permiso, index) => (
-            <div key={`div ${permiso.descripcion}`}>
-              <ListItem button key={index}>
-                <ListItemIcon>
-                  <Icon color="primary">{permiso.materialIcon}</Icon>
-                </ListItemIcon>
-                <ListItemText primary={permiso.descripcion} />
-              </ListItem>
-              <Divider variant="fullWidth" />
-              {permiso.rutas.map((pagina) => (
-                <div key={`div ${pagina.descripcion}`}>
-                  <ListItem button>
-                    <ListItemIcon>
-                      <ArrowRightIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={pagina.descripcion}
-                      onClick={() => navegarA(pagina.url)}
-                    />
-                  </ListItem>
-                  <Divider variant="inset" light />
-                </div>
-              ))}
-            </div>
+          {routes.map((pagina, index) => (
+            <OpcionDesplegable
+              key={index}
+              pagina={pagina}
+              navegarA={navegarA}
+            />
           ))}
         </List>
       </Drawer>

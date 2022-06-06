@@ -12,7 +12,7 @@ import { VentaList } from "../pages/VentaList";
 export const routes = [
   {
     descripcion: "Configuraciones",
-    materialIcon: "config",
+    materialIcon: "settings",
     rutas: [
       {
         descripcion: "Empresa",
@@ -33,7 +33,7 @@ export const routes = [
   },
   {
     descripcion: "Productos",
-    materialIcon: "config",
+    materialIcon: "shopping_bag",
     rutas: [
       {
         descripcion: "Familia de Productos",
@@ -54,7 +54,7 @@ export const routes = [
   },
   {
     descripcion: "Presupuesto",
-    materialIcon: "config",
+    materialIcon: "account_balance_wallet",
     rutas: [
       {
         descripcion: "Cuentas Contables",
@@ -65,7 +65,7 @@ export const routes = [
   },
   {
     descripcion: "Compra",
-    materialIcon: "config",
+    materialIcon: "shopping_cart",
     rutas: [
       {
         descripcion: "Registrar Compra",
@@ -81,7 +81,7 @@ export const routes = [
   },
   {
     descripcion: "Venta",
-    materialIcon: "config",
+    materialIcon: "shopping_cart_checkout",
     rutas: [
       {
         descripcion: "Registrar Venta",
@@ -97,7 +97,7 @@ export const routes = [
   },
   {
     descripcion: "Lista de Materiales",
-    materialIcon: "config",
+    materialIcon: "list",
     rutas: [
       {
         descripcion: "Crear Lista de Materiales",
@@ -113,7 +113,7 @@ export const routes = [
   },
   {
     descripcion: "Producción",
-    materialIcon: "config",
+    materialIcon: "engineering",
     rutas: [
       {
         descripcion: "Producir",
@@ -124,7 +124,7 @@ export const routes = [
   },
   {
     descripcion: "Salidas",
-    materialIcon: "config",
+    materialIcon: "receipt",
     rutas: [
       {
         descripcion: "Salida",

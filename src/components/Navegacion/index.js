@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, IconButton, Typography } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Typography, Chip } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import MenuIzquierdo from "./MenuIzquierdo";
@@ -10,6 +10,7 @@ import LogoHorizontal from "../../assets/img/logoHorizontal.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Tooltip } from "@mui/material";
 import { setUnLogged } from "../../slices/usuarioSlice";
+import { Box } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
 const Navegacion = () => {
   const classes = useStyles();
   const { usuario } = useSelector((state) => state.usuario);
+  const { descripcion } = useSelector((state) =>
+    state.sucursal.list.find((s) => s.id === usuario.sucursal)
+  ) || { descripcion: "" };
   const dispatch = useDispatch();
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -63,7 +67,21 @@ const Navegacion = () => {
               style={{ width: "130px" }}
             />
           </Link>
-          <Typography>{usuario.userName}</Typography>
+          <Box sx={{ flexGrow: 2 }} />
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <Chip
+              label={`Sucursal - ${descripcion}`}
+              variant="filled"
+              color="default"
+              style={{ color: "white" }}
+            />
+            <Chip
+              label={usuario.userName}
+              variant="filled"
+              color="default"
+              style={{ color: "white" }}
+            />
+          </Box>
           <PersonOutlineIcon />
           <Tooltip title="Cerrar sesión">
             <IconButton

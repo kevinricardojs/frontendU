@@ -20,7 +20,6 @@ export const usuarioSlice = createSlice({
       userName: "",
       email: "",
       sucursal: "",
-      empresa: "",
     },
     permisos: [],
   },

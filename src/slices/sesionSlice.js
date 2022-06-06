@@ -19,14 +19,7 @@ export const iniciarSesion = createAsyncThunk(
           window.localStorage.setItem("token", response.data.token);
           dispatch(setToken(response.data));
           dispatch(setLogged());
-          const [sucursal, empresa] = user.sucursal.descripcion.split(" - ");
-          dispatch(
-            setUser({
-              ...response.data.user,
-              sucursal: sucursal,
-              empresa: empresa,
-            })
-          );
+          dispatch(setUser(response.data.user));
         }
       });
     } catch (err) {
